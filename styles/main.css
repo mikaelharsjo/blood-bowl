@@ -8,6 +8,14 @@
 
  body > div > i {display: none !important;}
 
+ .main {
+   margin-top: 1rem;
+ }
+
+ .round {
+   margin-bottom: 1rem;   
+ }
+
  #cards .rating .material-icons {font-size: 24px;}
 
  #cards .details {

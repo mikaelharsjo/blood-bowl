@@ -2,7 +2,7 @@
 
 BloodBowl.prototype.getAllLeagues = function(render) {
   var query = firebase.firestore()
-    .collection('league');
+    .collection('leagues');
   this.getDocumentsInQuery(query, render);
 };
 
@@ -22,5 +22,5 @@ BloodBowl.prototype.getDocumentsInQuery = function(query, render) {
 };
 
 BloodBowl.prototype.getLeague = function(id) {
-  return firebase.firestore().collection('league').doc(id).get();
+  return firebase.firestore().collection('leagues').doc(id).get();
 };

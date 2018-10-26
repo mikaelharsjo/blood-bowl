@@ -62,11 +62,6 @@ BloodBowl.prototype.initRouter = function() {
       }
     })
     .on({
-      '/setup': function() {
-        that.viewSetup();
-      }
-    })
-    .on({
       '/leagues/*': function() {
         var path = that.getCleanPath(document.location.pathname);
         var id = path.split('/')[2];
@@ -80,18 +75,7 @@ BloodBowl.prototype.initRouter = function() {
         that.viewTeam(id);
       }
     })
-
     .resolve();
-
-  firebase
-    .firestore()
-    .collection('restaurants')
-    .limit(1)
-    .onSnapshot(function(snapshot) {
-      if (snapshot.empty) {
-        that.router.navigate('/setup');
-      }
-    });
 };
 
 BloodBowl.prototype.getCleanPath = function(dirtyPath) {

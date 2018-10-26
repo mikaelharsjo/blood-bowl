@@ -10,16 +10,13 @@ BloodBowl.prototype.initTemplates = function() {
 };
 
 BloodBowl.prototype.viewHome = function(render) {
-  this.viewList();
+  this.viewLeagues();
 };
 
-BloodBowl.prototype.viewList = function(filters, filter_description) {
-  if (!filter_description) {
-    filter_description = 'any type of food with any price in any city.';
-  }
-
+BloodBowl.prototype.viewLeagues = function() {
   var mainEl = this.renderTemplate('main-adjusted');
   var headerEl = this.renderTemplate('header-base', {
+    title: 'Leagues',
     hasSectionHeader: true
   });
 
@@ -52,54 +49,33 @@ BloodBowl.prototype.viewList = function(filters, filter_description) {
   };
 
   this.getAllLeagues(renderResults);
-
-  var toolbar = mdc.toolbar.MDCToolbar.attachTo(document.querySelector('.mdc-toolbar'));
-  toolbar.fixedAdjustElement = document.querySelector('.mdc-toolbar-fixed-adjust');
-
-  mdc.autoInit();
 };
 
 BloodBowl.prototype.viewLeague = function(id) {
   var sectionHeaderEl;
   var that = this;
+  let rounds = [];
+
 
   return this.getLeague(id)
     .then(function(doc) {
-      var data = doc.data();
-      var dialog =  that.dialogs.add_review;
+      const league = doc.data();
 
-      data.show_add_review = function() {
-        dialog.show();
-      };
+      var mainEl = that.renderTemplate('main-adjusted');
 
-      var mainEl;
-
-      mainEl = that.renderTemplate('main-adjusted');
-
-      data.rounds[0].teams.forEach(function(team, index) {
-        team['go_to_team'] = function() {
-          that.router.navigate('/teams/' + doc.id);
-        };
-
-        var el = that.renderTemplate('team-card', team);
-        mainEl.querySelector('#cards').append(el);
+      league.rounds.forEach((round, index) => {
+        round.title = `Round: ${index + 1}`;
+        var roundEl = that.renderTemplate('round', round);
+        mainEl.querySelector('#content').append(roundEl);
       });
 
       var headerEl = that.renderTemplate('header-base', {
-        hasSectionHeader: true
+        title: league.name,
+        //hasSectionHeader: true
       });
 
       that.replaceElement(document.querySelector('.header'), headerEl);
       that.replaceElement(document.querySelector('main'), mainEl);
-
-      var toolbar = mdc.toolbar.MDCToolbar.attachTo(document.querySelector('.mdc-toolbar'));
-      toolbar.fixedAdjustElement = document.querySelector('.mdc-toolbar-fixed-adjust');
-    })
-    .then(function() {
-      that.router.updatePageLinks();
-    })
-    .catch(function(err) {
-      console.warn('Error rendering page', err);
     });
 };
 
@@ -190,6 +166,8 @@ BloodBowl.prototype.render = function(el, data) {
     },
     'data-fir-content': function(tel) {
       var field = tel.getAttribute('data-fir-content');
+      console.log('data', data);
+      console.log('field', field);
       tel.innerText = that.getDeepItem(data, field);
     },
     'data-fir-click': function(tel) {
@@ -251,9 +229,11 @@ BloodBowl.prototype.useModifier = function(el, selector, modifier) {
 };
 
 BloodBowl.prototype.getDeepItem = function(obj, path) {
+  console.log('obj', obj);
   path.split('/').forEach(function(chunk) {
     obj = obj[chunk];
   });
+  console.log('obj', obj);
   return obj;
 };
 

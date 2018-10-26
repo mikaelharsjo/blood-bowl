@@ -63,16 +63,17 @@
       <header id="site-header" class="mdc-toolbar mdc-toolbar--fixed">
         <div id="title" class="mdc-toolbar__row mdc-layout-grid">
           <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-            <span class="mdc-toolbar__title">Blood Bowl</span>
+            <span class="mdc-toolbar__title" data-fir-content="title">Blood Bowl</span>
           </section>
         </div>
         <div id="section-header" data-fir-if="hasSectionHeader"></div>
       </header>
   </div>
 
-  <div hidden class="template" id="main-adjusted">
+  <div hidden class="template main" id="main-adjusted">
     <div id="message-cards-container" class="mdc-layout-grid mdc-toolbar-fixed-adjust">
       <div id="cards" class="mdc-layout-grid__inner"></div>
+      <div id="content"></div>
     </div>
   </div>
 
@@ -82,18 +83,35 @@
     </div>
   </div>
 
-  <div hidden class="template" id="no-restaurants">
-    <div id="guy-container" class="mdc-toolbar-fixed-adjust">
-      <img class="guy" src="/images/guy_fireats.png" />
-      <div class="text">
-        This app is connected to the Firebase project "<b data-fir-content="projectId"></b>".<br />
-        <br />
-        Your Cloud Firestore has no documents in <b>/restaurants/</b>.
+  <div hidden class="template mdc-toolbar-fixed-adjust" id="main-grid">
+    <div id="grid" class="mdc-grid">
+    </div>
+  </div>
+
+
+  <div hidden class="template round" id="round">
+    <span data-fir-content="title"></span> of 8
+    <div class="mdc-card">
+      <div class="mdc-layout-grid" style="width: 100%;">
+        <div class="mdc-layout-grid__inner">
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
+            <div data-fir-content="game1/homeTeam"></div>
+            <div data-fir-content="game1/awayTeam"></div>
+          </div>
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
+            <div data-fir-content="game1/homeTD"></div>
+            <div data-fir-content="game1/awayTD"></div>
+          </div>
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
+            <div data-fir-content="game2/homeTeam"></div>
+            <div data-fir-content="game2/awayTeam"></div>
+          </div>
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
+            <div data-fir-content="game2/homeTD"></div>
+            <div data-fir-content="game2/awayTD"></div>
+          </div>
+        </div>
       </div>
-      <br />
-      <a class="mdc-button" id="add_mock_data">
-        Add mock data
-      </a>
     </div>
   </div>
 
@@ -117,46 +135,6 @@
         There are no results for your those filters!
       </div>
     </div>
-  </div>
-
-  <div hidden class="template" id="filter-display">
-    <div id="filter" class="mdc-toolbar mdc-layout-grid">
-      <div id="show-filters" >
-        <div id="active-filters">
-          <i class="material-icons">filter_list</i>
-          You're seeing <b data-fir-content="filter_description"></b>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div hidden class="template" id="restaurant-header">
-    <header class="mdc-layout__header mdc-layout__header--transparent" data-fir-style="backgroundImage:photo">
-
-      <div class="mdc-layout-grid" style="width: 100%;">
-          <div class="mdc-layout-grid__inner">
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-                  <a href="/" data-navigo class="material-icons" id="close">close</a>
-              </div>
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 info">
-                <div class="max_width_600">
-                  <h2 data-fir-content="name"></h2>
-                  <span class="price"></span>
-                  <div class="rating"></div>
-                  <div class="details">
-                    <span class="rating"></span>
-                    <span data-fir-content="category"></span>
-                    <span class="light">●</span>
-                    <span data-fir-content="city"></span>
-                  </div>
-                  <button id="show-add-review" data-fir-click="show_add_review" class="mdc-button fab">
-                      <i class="material-icons">add</i>
-                    </button>
-                </div>
-              </div>
-          </div>
-        </div>
-    </header>
   </div>
 
   <div hidden class="template" id="rating"></div>
@@ -216,28 +194,6 @@
 
   <ul hidden class="template mdc-list" id="item-list">
       <li class="mdc-list-item" data-mdc-auto-init="MDCRipple" data-fir-foreach="items" data-fir-content="~"></li>
-  </ul>
-
-  <ul hidden class="template mdc-list" id="all-filters-list">
-    <li id="show-page-category" class="mdc-list-item" data-mdc-auto-init="MDCRipple">
-      <i class="material-icons">fastfood</i>
-      <span data-fir-if-not="category">Any Category</span>
-      <b data-fir-content="category"></b>
-    </li>
-    <li id="show-page-city" class="mdc-list-item" data-mdc-auto-init="MDCRipple">
-      <i class="material-icons">location_on</i>
-      <span data-fir-if-not="city">Any Location</span>
-      <b data-fir-content="city"></b>
-    </li>
-    <li id="show-page-price" class="mdc-list-item" data-mdc-auto-init="MDCRipple">
-      <i class="material-icons">monetization_on</i>
-      <span data-fir-if-not="price">Any Price</span>
-      <b data-fir-content="price"></b>
-    </li>
-    <li id="show-page-sort" class="mdc-list-item" data-mdc-auto-init="MDCRipple">
-      <i class="material-icons">sort</i>
-      <b data-fir-content="sort"></b>
-    </li>
   </ul>
 
   <aside id="dialog-filter-all" class="mdc-dialog">
