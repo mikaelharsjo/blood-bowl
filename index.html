@@ -93,24 +93,60 @@
     <span data-fir-content="title"></span> of 8
     <div class="mdc-card">
       <div class="mdc-layout-grid" style="width: 100%;">
-        <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
-            <div data-fir-content="game1/homeTeam"></div>
-            <div data-fir-content="game1/awayTeam"></div>
-          </div>
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
-            <div data-fir-content="game1/homeTD"></div>
-            <div data-fir-content="game1/awayTD"></div>
-          </div>
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
-            <div data-fir-content="game2/homeTeam"></div>
-            <div data-fir-content="game2/awayTeam"></div>
-          </div>
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
-            <div data-fir-content="game2/homeTD"></div>
-            <div data-fir-content="game2/awayTD"></div>
-          </div>
-        </div>
+        <table>
+          <tbody>
+            <tr>
+              <td data-fir-content="game1/homeTeam" width="40%"></td>
+              <td data-fir-content="game1/homeTD"></td>
+              <td class="cell-spacer">&nbsp;</td>
+              <td data-fir-content="game2/homeTeam" width="40%">></td>
+              <td data-fir-content="game2/homeTD"></td>
+            </tr>
+            <tr>
+              <td data-fir-content="game1/awayTeam"></td>
+              <td data-fir-content="game1/awayTD"></td>
+              <td class="cell-spacer">&nbsp;</td>
+              <td data-fir-content="game2/awayTeam"></td>
+              <td data-fir-content="game2/awayTD"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div hidden class="template" id="standings">
+    <div class="mdc-card">
+      <div class="mdc-layout-grid" style="width: 100%;">
+        <table class="table__standings">
+          <thead>
+            <tr>
+              <th></th>
+              <th class="stat-col">MP</th>
+              <th class="stat-col">W</th>
+              <th class="stat-col">D</th>
+              <th class="stat-col">L</th>
+              <th class="stat-col">TF</th>
+              <th class="stat-col">TA</th>
+              <th class="stat-col">Pts</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-fir-foreach="standings">
+              <td>
+                <span data-fir-content="~/index"></span>
+                <span data-fir-content="~/name"></span>
+              </td>
+              <td data-fir-content="~/matches" class="stat-col"></td>
+              <td data-fir-content="~/wins" class="stat-col"></td>
+              <td data-fir-content="~/draws" class="stat-col"></td>
+              <td data-fir-content="~/losses" class="stat-col"></td>
+              <td data-fir-content="~/tdf" class="stat-col"></td>
+              <td data-fir-content="~/tda" class="stat-col"></td>
+              <td data-fir-content="~/points" class="stat-col"></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

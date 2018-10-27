@@ -63,12 +63,41 @@ BloodBowl.prototype.viewLeague = function(id) {
 
       var mainEl = that.renderTemplate('main-adjusted');
 
+      // var standings = [
+      //   { name: 'Jesters of Khaine', MP: 0, W: 0, D: 0, L: 0, TDF: 0, TDA: 0, Pts: 0 },
+      //   { name: 'Hell Pit Sewer Rats', MP: 0, W: 0, D: 0, L: 0, TDF: 0, TDA: 0, Pts: 0 },
+      //   { name: 'Barrelhouse Brewers', MP: 0, W: 0, D: 0, L: 0, TDF: 0, TDA: 0, Pts: 0 },
+      //   { name: 'Drifting Castle Decendants', MP: 0, W: 0, D: 0, L: 0, TDF: 0, TDA: 0, Pts: 0 },
+      //   { name: 'Sons of Northern Darkness', MP: 0, W: 0, D: 0, L: 0, TDF: 0, TDA: 0, Pts: 0 },
+      // ];
+
       league.rounds.forEach((round, index) => {
         round.title = `Round: ${index + 1}`;
         var roundEl = that.renderTemplate('round', round);
+
         mainEl.querySelector('#content').append(roundEl);
       });
 
+      league.standings = league.standings
+        .sort((a,b) => {
+          if (a.points < b.points) {
+            return 1;
+          }
+
+          if (a.points > b.points) {
+            return -1;
+          }
+          return 0;
+      }).map((t, index) => {
+        t.index = index + 1;
+        console.log('t', t);
+        return t;
+      })
+
+      console.log('league.standings', league.standings);
+
+      var standingsEl = that.renderTemplate('standings', league);
+      mainEl.querySelector('#content').append(standingsEl);
       var headerEl = that.renderTemplate('header-base', {
         title: league.name,
         //hasSectionHeader: true
@@ -166,8 +195,6 @@ BloodBowl.prototype.render = function(el, data) {
     },
     'data-fir-content': function(tel) {
       var field = tel.getAttribute('data-fir-content');
-      console.log('data', data);
-      console.log('field', field);
       tel.innerText = that.getDeepItem(data, field);
     },
     'data-fir-click': function(tel) {
@@ -229,11 +256,9 @@ BloodBowl.prototype.useModifier = function(el, selector, modifier) {
 };
 
 BloodBowl.prototype.getDeepItem = function(obj, path) {
-  console.log('obj', obj);
   path.split('/').forEach(function(chunk) {
     obj = obj[chunk];
   });
-  console.log('obj', obj);
   return obj;
 };
 

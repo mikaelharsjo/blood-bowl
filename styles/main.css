@@ -13,7 +13,43 @@
  }
 
  .round {
-   margin-bottom: 1rem;   
+   margin-bottom: 1rem;
+ }
+
+ table {
+   font-size: 0.9rem;
+   width: 100%;
+   border-collapse: collapse;
+ }
+
+ .table__standings {
+ }
+
+ thead th {
+   text-align: left;
+   color: var(--mdc-theme-text-secondary-on-light);
+   font-weight: normal;
+ }
+
+ .table__standings tr {
+   border-bottom: solid 1px #ccc;
+ }
+
+ tr:last-child {
+   border: none;
+ }
+
+ td {
+   padding: 0.4rem;
+ }
+
+ .cell-spacer {
+  border-left: solid 1px #ccc;
+ }
+
+ .stat-col {
+   max-width: 1rem;
+   text-align: right;
  }
 
  #cards .rating .material-icons {font-size: 24px;}
