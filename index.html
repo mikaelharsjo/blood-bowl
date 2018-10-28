@@ -89,7 +89,7 @@
   </div>
 
 
-  <div hidden class="template round" id="round">
+  <div hidden class="template section" id="round">
     <span data-fir-content="title"></span> of 8
     <div class="mdc-card">
       <div class="mdc-layout-grid" style="width: 100%;">
@@ -115,7 +115,7 @@
     </div>
   </div>
 
-  <div hidden class="template" id="standings">
+  <div hidden class="template section" id="standings">
     <div class="mdc-card">
       <div class="mdc-layout-grid" style="width: 100%;">
         <table class="table__standings">
@@ -144,6 +144,31 @@
               <td data-fir-content="~/tdf" class="stat-col"></td>
               <td data-fir-content="~/tda" class="stat-col"></td>
               <td data-fir-content="~/points" class="stat-col"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div hidden class="template section" id="stats">
+    <div class="mdc-card">
+      <div class="mdc-layout-grid" style="width: 100%;">
+        <div class="mdc-card__title">Touchdowns</div>
+        <table class="table__standings">
+          <thead>
+            <tr>
+              <th class="stat-col"></th>
+              <th class="stat-col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-fir-foreach="touchdowns">
+              <td>
+                <span data-fir-content="~/index"></span>
+                <span data-fir-content="~/name"></span>
+              </td>
+              <td data-fir-content="~/count" class="stat-col"></td>
             </tr>
           </tbody>
         </table>

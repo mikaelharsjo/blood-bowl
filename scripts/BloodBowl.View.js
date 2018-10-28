@@ -56,6 +56,10 @@ BloodBowl.prototype.viewLeague = function(id) {
   var that = this;
   let rounds = [];
 
+  const addIndex = (t, index) => {
+    t.index = index + 1;
+    return t
+  };
 
   return this.getLeague(id)
     .then(function(doc) {
@@ -88,11 +92,7 @@ BloodBowl.prototype.viewLeague = function(id) {
             return -1;
           }
           return 0;
-      }).map((t, index) => {
-        t.index = index + 1;
-        console.log('t', t);
-        return t;
-      })
+      }).map(addIndex);
 
       console.log('league.standings', league.standings);
 
@@ -102,6 +102,12 @@ BloodBowl.prototype.viewLeague = function(id) {
         title: league.name,
         //hasSectionHeader: true
       });
+
+      console.log('league.touchdowns', league.touchdowns);
+      league.touchdowns = league.touchdowns.map(addIndex);
+      var touchdownsEl = that.renderTemplate('stats', league);
+      console.log('tou', touchdownsEl);
+      mainEl.querySelector('#content').append(touchdownsEl);
 
       that.replaceElement(document.querySelector('.header'), headerEl);
       that.replaceElement(document.querySelector('main'), mainEl);
