@@ -65,7 +65,7 @@ BloodBowl.prototype.viewLeague = function(id) {
     .then(function(doc) {
       const league = doc.data();
 
-      var mainEl = that.renderTemplate('main-adjusted');
+      var mainEl = that.renderTemplate('main-league');
 
       // var standings = [
       //   { name: 'Jesters of Khaine', MP: 0, W: 0, D: 0, L: 0, TDF: 0, TDA: 0, Pts: 0 },
@@ -79,7 +79,7 @@ BloodBowl.prototype.viewLeague = function(id) {
         round.title = `Round: ${index + 1}`;
         var roundEl = that.renderTemplate('round', round);
 
-        mainEl.querySelector('#content').append(roundEl);
+        mainEl.querySelector('#rounds').append(roundEl);
       });
 
       league.standings = league.standings
@@ -97,8 +97,8 @@ BloodBowl.prototype.viewLeague = function(id) {
       console.log('league.standings', league.standings);
 
       var standingsEl = that.renderTemplate('standings', league);
-      mainEl.querySelector('#content').append(standingsEl);
-      var headerEl = that.renderTemplate('header-base', {
+      mainEl.querySelector('#standings').append(standingsEl);
+      var headerEl = that.renderTemplate('header-league', {
         title: league.name,
         //hasSectionHeader: true
       });
@@ -107,10 +107,33 @@ BloodBowl.prototype.viewLeague = function(id) {
       league.touchdowns = league.touchdowns.map(addIndex);
       var touchdownsEl = that.renderTemplate('stats', league);
       console.log('tou', touchdownsEl);
-      mainEl.querySelector('#content').append(touchdownsEl);
+      mainEl.querySelector('#stats').append(touchdownsEl);
 
       that.replaceElement(document.querySelector('.header'), headerEl);
       that.replaceElement(document.querySelector('main'), mainEl);
+
+      const tabBar = new mdc.tabBar.MDCTabBar(document.querySelector('.mdc-tab-bar'));
+      document.addEventListener('MDCTabBar:activated', e => {
+        console.log('e.detail', e.detail);
+        const roundsEl = document.querySelector('#rounds');
+        const statsEl = document.querySelector('#stats');
+        const standingsEl = document.querySelector('#standings');
+        if (e.detail.index === 0) {
+          rounds.removeAttribute('hidden');
+          statsEl.setAttribute('hidden', false);
+          standingsEl.setAttribute('hidden', true);
+        }
+        if (e.detail.index === 1) {
+          standingsEl.removeAttribute('hidden');
+          roundsEl.setAttribute('hidden', true);
+          statsEl.setAttribute('hidden', true);
+        }
+        if (e.detail.index === 2) {
+          statsEl.removeAttribute('hidden');
+          roundsEl.setAttribute('hidden', true);
+          standingsEl.setAttribute('hidden', true);
+        }
+      })
     });
 };
 

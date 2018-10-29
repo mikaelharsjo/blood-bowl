@@ -43,8 +43,8 @@
 
   <!-- Material Design Components -->
   <link rel="stylesheet"
-  href="https://unpkg.com/material-components-web@0.39.3/dist/material-components-web.min.css">
-  <script src="https://unpkg.com/material-components-web@0.39.3/dist/material-components-web.js"></script>
+  href="https://unpkg.com/material-components-web@0.40.1/dist/material-components-web.min.css">
+  <script src="https://unpkg.com/material-components-web@0.40.1/dist/material-components-web.js"></script>
 
   <!-- App Styling -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
@@ -55,7 +55,9 @@
 <div>
   <div class="header"></div>
 
-  <main></main>
+  <main>
+
+  </main>
 
   <div class="dialogs"></div>
 
@@ -67,6 +69,52 @@
           </section>
         </div>
         <div id="section-header" data-fir-if="hasSectionHeader"></div>
+      </header>
+  </div>
+
+  <div hidden class="template" id="header-league">
+      <header id="site-header" class="mdc-toolbar mdc-toolbar--fixed">
+        <div id="title" class="mdc-toolbar__row mdc-layout-grid">
+          <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+            <span class="mdc-toolbar__title" data-fir-content="title">Blood Bowl</span>
+          </section>
+        </div>
+        <div id="section-header" data-fir-if="hasSectionHeader"></div>
+        <div class="mdc-tab-bar" role="tablist">
+          <div class="mdc-tab-scroller">
+            <div class="mdc-tab-scroller__scroll-area mdc-tab-scroller__scroll-area--scroll" style="margin-bottom: 0px;">
+              <div class="mdc-tab-scroller__scroll-content">
+                <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0">
+                  <span class="mdc-tab__content">
+                    <span class="mdc-tab__text-label">Rounds</span>
+                  </span>
+                  <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                  </span>
+                  <span class="mdc-tab__ripple mdc-ripple-upgraded mdc-ripple-upgraded--foreground-activation" style="--mdc-ripple-fg-size:144px; --mdc-ripple-fg-scale:1.77018; --mdc-ripple-fg-translate-start:68.7188px, -46.5px; --mdc-ripple-fg-translate-end:48.0781px, -48px;"></span>
+                </button>
+                <button class="mdc-tab" role="tab" aria-selected="false" tabindex="-1">
+                  <span class="mdc-tab__content">
+                    <span class="mdc-tab__text-label">Standings</span>
+                  </span>
+                  <span class="mdc-tab-indicator">
+                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                  </span>
+                  <span class="mdc-tab__ripple mdc-ripple-upgraded"></span>
+                </button>
+                <button class="mdc-tab" role="tab" aria-selected="false" tabindex="-1">
+                  <span class="mdc-tab__content">
+                    <span class="mdc-tab__text-label">Stats</span>
+                  </span>
+                  <span class="mdc-tab-indicator">
+                    <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                  </span>
+                  <span class="mdc-tab__ripple mdc-ripple-upgraded"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </header>
   </div>
 
@@ -83,11 +131,19 @@
     </div>
   </div>
 
+  <div hidden class="template main main__league" id="main-league">
+    <div id="message-cards-container" class="mdc-layout-grid mdc-toolbar-fixed-adjust">
+      <div id="cards" class="mdc-layout-grid__inner"></div>
+      <div id="rounds"></div>
+      <div id="standings" hidden></div>
+      <div id="stats" hidden></div>
+    </div>
+  </div>
+
   <div hidden class="template mdc-toolbar-fixed-adjust" id="main-grid">
     <div id="grid" class="mdc-grid">
     </div>
   </div>
-
 
   <div hidden class="template section" id="round">
     <span data-fir-content="title"></span> of 8
